@@ -9,11 +9,8 @@
 /.idea/navEditor.xml
 /.idea/assetWizardSettings.xml
 .DS_Store
-/build
 /captures
-.externalNativeBuild
 .cxx
-local.properties
 
 # Created by https://www.toptal.com/developers/gitignore/api/androidstudio,macos,windows,kotlin
 # Edit at https://www.toptal.com/developers/gitignore?templates=androidstudio,macos,windows,kotlin
@@ -46,7 +43,6 @@ replay_pid*
 
 ### macOS ###
 # General
-.DS_Store
 .AppleDouble
 .LSOverride
 
@@ -122,7 +118,6 @@ gen/
 out/
 
 # Gradle files
-.gradle
 .gradle/
 build/
 
@@ -223,9 +218,6 @@ target/
 ## Plugin-specific files:
 ### IntelliJ IDEA ###
 .idea
-*.iws
-*.iml
-*.ipr
 
 ### NetBeans ###
 /nbproject/private/
