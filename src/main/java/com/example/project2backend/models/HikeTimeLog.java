@@ -26,6 +26,8 @@ public class HikeTimeLog {
 
     private LocalDateTime endedAt;
 
+    private boolean isRunning;
+
     // Computed when endedAt is set
     private Integer durationMinutes;
 
@@ -80,6 +82,9 @@ public class HikeTimeLog {
 
     public Integer getDurationMinutes() { return durationMinutes; }
     public void setDurationMinutes(Integer durationMinutes) { this.durationMinutes = durationMinutes; }
+
+    public Boolean isRunning(){ return isRunning; }
+    public void setIsRunning(boolean running){isRunning = running; }
 
     public LocalDateTime getCreatedAt() { return createdAt; }
     public LocalDateTime getUpdatedAt() { return updatedAt; }
