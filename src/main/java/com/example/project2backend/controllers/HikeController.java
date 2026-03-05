@@ -1,8 +1,7 @@
 package com.example.project2backend.controllers;
 
-import com.example.project2backend.models.HikeLog;
-import com.example.project2backend.repositories.HikeLogRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.project2backend.models.Hike;
+import com.example.project2backend.services.HikeService;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -10,18 +9,24 @@ import java.util.List;
 @RequestMapping("/api/hikes")
 public class HikeController {
 
-    @Autowired
-    private HikeLogRepository hikeLogRepository;
+    private final HikeService hikeService;
 
-    // RECEIVE DATA: Save a hike from the Landing Page
-    @PostMapping
-    public HikeLog logHike(@RequestBody HikeLog hike) {
-        return hikeLogRepository.save(hike);
+    public HikeController(HikeService hikeService) {
+        this.hikeService = hikeService;
     }
 
-    // SEND DATA: Get the leaderboard filtered by type
-    @GetMapping("/leaderboard")
-    public List<HikeLog> getLeaderboard(@RequestParam String type) {
-        return hikeLogRepository.findByActivityTypeOrderByDistanceMilesDesc(type);
+    @GetMapping
+    public List<Hike> getAll() {
+        return hikeService.getAllHikes();
+    }
+
+    @GetMapping("/{id}")
+    public Hike getOne(@PathVariable Long id) {
+        return hikeService.getHike(id);
+    }
+
+    @PostMapping
+    public Hike create(@RequestBody Hike hike) {
+        return hikeService.createHike(hike);
     }
 }
