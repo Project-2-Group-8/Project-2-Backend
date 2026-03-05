@@ -10,7 +10,7 @@ public interface HikeTimeLogRepository extends JpaRepository<HikeTimeLog, Long> 
 
     List<HikeTimeLog> findByUserEmailOrderByStartedAtDesc(String userEmail);
 
-    List<HikeTimeLog> findByRunning(boolean running);
+    List<HikeTimeLog> findByRunning(boolean isRunning);
 
     Optional<HikeTimeLog> findByIdAndUserEmail(Long id, String userEmail);
 }
