@@ -29,6 +29,7 @@ public class HikeTimeLogService {
         log.setStartedAt(LocalDateTime.now());
         log.setEndedAt(null);
         log.setDurationMinutes(null);
+        log.setIsRunning(req.running());
         return repo.save(log);
     }
 
@@ -41,6 +42,11 @@ public class HikeTimeLogService {
     public HikeTimeLog getMine(String userEmail, Long id) {
         return repo.findByIdAndUserEmail(id, userEmail)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "HikeTimeLog not found"));
+    }
+
+    @Transactional(readOnly = true)
+    public List<HikeTimeLog> listRunning(boolean running) {
+        return repo.findByRunning(running);
     }
 
     @Transactional
