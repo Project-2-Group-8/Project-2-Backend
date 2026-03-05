@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:5173")
 @RequestMapping("/api/hikes")
 public class HikeController {
 
@@ -23,5 +24,10 @@ public class HikeController {
     @GetMapping("/leaderboard")
     public List<HikeLog> getLeaderboard(@RequestParam String type) {
         return hikeLogRepository.findByActivityTypeOrderByDistanceMilesDesc(type);
+    }
+
+    @GetMapping
+    public List<HikeLog> getAllHikes() {
+        return hikeLogRepository.findAll(); // get all hike logs
     }
 }
