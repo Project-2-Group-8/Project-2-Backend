@@ -29,7 +29,7 @@ public class HikeTimeLogService {
         log.setStartedAt(LocalDateTime.now());
         log.setEndedAt(null);
         log.setDurationMinutes(null);
-        log.setIsRunning(req.running());
+        log.setIsRunning(req.isRunning());
         return repo.save(log);
     }
 

@@ -5,11 +5,12 @@ import com.example.project2backend.repositories.HikeLogRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:5173")
-@RequestMapping("/api/hikes")
-public class HikeController {
+@RequestMapping("/api/hike_logs")
+public class HikeLogController {
 
     @Autowired
     private HikeLogRepository hikeLogRepository;
@@ -24,6 +25,11 @@ public class HikeController {
     @GetMapping("/leaderboard")
     public List<HikeLog> getLeaderboard(@RequestParam String type) {
         return hikeLogRepository.findByActivityTypeOrderByDistanceMilesDesc(type);
+    }
+
+    @GetMapping("/{id}")
+    public Optional<HikeLog> getHikeById(@PathVariable Long id) {
+        return hikeLogRepository.findById(id);
     }
 
     @GetMapping
