@@ -19,11 +19,18 @@ public class HikeLog {
     @Column(name = "created_at")
     private LocalDateTime createdAt = LocalDateTime.now();
 
+    @ManyToOne
+    @JoinColumn(name = "hikeId") // FK column in hike_logs
+    private Hike hike;
+
+
     public HikeLog() {}
 
     // Getters and Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
+    public Hike getHike() { return hike; }
+    public void setHike(Hike hike) { this.hike = hike; }
     public String getUserEmail() { return userEmail; }
     public void setUserEmail(String userEmail) { this.userEmail = userEmail; }
     public String getTrailName() { return trailName; }

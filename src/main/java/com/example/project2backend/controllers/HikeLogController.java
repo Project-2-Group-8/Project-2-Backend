@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/hikes")
+@RequestMapping("/api/hike-logs")
 public class HikeLogController {
 
     @Autowired
