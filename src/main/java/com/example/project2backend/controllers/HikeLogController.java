@@ -13,6 +13,10 @@ public class HikeLogController {
     @Autowired
     private HikeLogRepository hikeLogRepository;
 
+    public HikeLogController(HikeLogRepository hikeLogRepository) {
+        this.hikeLogRepository = hikeLogRepository;
+    }
+
     // RECEIVE DATA: Save a hike from the Landing Page
     @PostMapping
     public HikeLog logHike(@RequestBody HikeLog hike) {
@@ -22,6 +26,11 @@ public class HikeLogController {
     // SEND DATA: Get the leaderboard filtered by type
     @GetMapping("/leaderboard")
     public List<HikeLog> getLeaderboard(@RequestParam String type) {
-        return hikeLogRepository.findByActivityTypeOrderByDistanceMilesDesc(type);
+        return hikeLogRepository.findByActivityTypeOrderByDistanceMileDesc(type);
+    }
+
+    @GetMapping("/user/{userId}")
+    public List<HikeLog> logsForUser(@PathVariable Long userId) {
+        return hikeLogRepository.findByUserIdOrderByCreatedAtDesc(userId);
     }
 }

@@ -15,7 +15,7 @@ public class HikeController {
         this.hikeService = hikeService;
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public List<Hike> getAll() {
         return hikeService.getAllHikes();
     }
