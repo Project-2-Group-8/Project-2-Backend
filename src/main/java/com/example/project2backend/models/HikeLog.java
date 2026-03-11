@@ -20,7 +20,7 @@ public class HikeLog {
     private LocalDateTime createdAt = LocalDateTime.now();
 
     @ManyToOne
-    @JoinColumn(name = "hikeId") // FK column in hike_logs
+    @JoinColumn(name = "hike_id") // FK column in hike_logs
     private Hike hike;
 
 
