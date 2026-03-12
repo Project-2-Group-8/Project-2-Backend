@@ -51,8 +51,9 @@ public class SecurityConfig {
             .requestMatchers("/auth/me").authenticated()
 
             // Protect your API
-            .requestMatchers("/api/**").authenticated()
-
+            // .requestMatchers("/api/**").authenticated()
+            .requestMatchers("/api/**").permitAll()
+                               
             .anyRequest().permitAll()
         )
         .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));
