@@ -10,8 +10,7 @@ public class HikeTimeLogDtos {
     // POST /api/hike-times
     public record StartRequest(
             @NotBlank String trailName,
-            String notes,
-            boolean isRunning
+            String notes
     ) {}
 
     // PUT /api/hike-times/{id} 
