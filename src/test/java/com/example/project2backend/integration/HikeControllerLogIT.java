@@ -27,14 +27,14 @@ class HikeLogControllerIT {
     @BeforeEach
     void setUp() {
         RestAssured.port = port;
-        hikeLogRepository.deleteAll(); // clean slate before each test
+        hikeLogRepository.deleteAll();
     }
 
     @Test
     void logHikeAndGetAll() {
         HikeLog hike = new HikeLog();
         hike.setActivityType("trail");
-        hike.setDistanceMiles(5.0);
+        hike.setDistanceMile(5.0);
 
         // POST a hike
         RestAssured.given()
@@ -43,7 +43,7 @@ class HikeLogControllerIT {
                 .when().post("/api/hike_logs")
                 .then().statusCode(200)
                 .body("activityType", equalTo("trail"))
-                .body("distanceMiles", equalTo(5.0f)); // REST Assured uses float for JSON numbers
+                .body("distanceMiles", equalTo(5.0f));
 
         // GET all hikes
         RestAssured.given()
@@ -54,9 +54,9 @@ class HikeLogControllerIT {
 
     @Test
     void getLeaderboardFiltersByType() {
-        HikeLog h1 = new HikeLog(); h1.setActivityType("trail"); h1.setDistanceMiles(3.0);
-        HikeLog h2 = new HikeLog(); h2.setActivityType("trail"); h2.setDistanceMiles(6.0);
-        HikeLog h3 = new HikeLog(); h3.setActivityType("bike"); h3.setDistanceMiles(10.0);
+        HikeLog h1 = new HikeLog(); h1.setActivityType("trail"); h1.setDistanceMile(3.0);
+        HikeLog h2 = new HikeLog(); h2.setActivityType("trail"); h2.setDistanceMile(6.0);
+        HikeLog h3 = new HikeLog(); h3.setActivityType("bike"); h3.setDistanceMile(10.0);
 
         hikeLogRepository.saveAll(List.of(h1, h2, h3));
 
@@ -73,11 +73,11 @@ class HikeLogControllerIT {
     void getHikeByIdReturnsHike() {
         HikeLog hike = new HikeLog();
         hike.setActivityType("trail");
-        hike.setDistanceMiles(2.0);
+        hike.setDistanceMile(2.0);
         HikeLog saved = hikeLogRepository.save(hike);
 
         RestAssured.given()
-                .when().get("/api/hike_logs/{id}", saved.getId())
+                .when().get("/api/hike_logs/{id}", saved.getLogId())
                 .then().statusCode(200)
                 .body("activityType", equalTo("trail"))
                 .body("distanceMiles", equalTo(2.0f));

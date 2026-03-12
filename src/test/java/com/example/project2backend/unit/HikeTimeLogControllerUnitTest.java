@@ -62,8 +62,7 @@ class HikeTimeLogControllerUnitTest {
         OAuth2User user = mockUser("alice@example.com");
         HikeTimeLogDtos.StartRequest req = new HikeTimeLogDtos.StartRequest(
                 "trail",
-                "Nice hike",
-                false
+                "Nice hike"
         );
         HikeTimeLog log = new HikeTimeLog();
 

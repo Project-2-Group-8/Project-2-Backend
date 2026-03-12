@@ -3,11 +3,11 @@ package com.example.project2backend.unit;
 import com.example.project2backend.controllers.HikeLogController;
 import com.example.project2backend.models.HikeLog;
 import com.example.project2backend.repositories.HikeLogRepository;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -20,14 +20,15 @@ class HikeLogControllerUnitTest {
     @BeforeEach
     void setUp() {
         mockRepo = mock(HikeLogRepository.class);
-        controller = new HikeLogController();
-        controller.hikeLogRepository = mockRepo;
+        controller = new HikeLogController(mockRepo);
     }
 
     @Test
     void logHikeSavesHike() {
+
         HikeLog hike = new HikeLog();
-        hike.setId(1L);
+        hike.setLogId(1L);
+
         when(mockRepo.save(hike)).thenReturn(hike);
 
         HikeLog result = controller.logHike(hike);
@@ -38,41 +39,45 @@ class HikeLogControllerUnitTest {
 
     @Test
     void getLeaderboardReturnsFilteredHikes() {
-        HikeLog hike1 = new HikeLog(); hike1.setActivityType("trail");
-        HikeLog hike2 = new HikeLog(); hike2.setActivityType("trail");
+
+        HikeLog hike1 = new HikeLog();
+        hike1.setActivityType("Walking");
+
+        HikeLog hike2 = new HikeLog();
+        hike2.setActivityType("Walking");
+
         List<HikeLog> hikes = List.of(hike1, hike2);
 
-        when(mockRepo.findByActivityTypeOrderByDistanceMilesDesc("trail")).thenReturn(hikes);
+        when(mockRepo.findByActivityTypeOrderByDistanceMileDesc("Walking"))
+                .thenReturn(hikes);
 
-        List<HikeLog> result = controller.getLeaderboard("trail");
+        List<HikeLog> result = controller.getLeaderboard("Walking");
 
         assertEquals(2, result.size());
-        verify(mockRepo, times(1)).findByActivityTypeOrderByDistanceMilesDesc("trail");
+
+        verify(mockRepo, times(1))
+                .findByActivityTypeOrderByDistanceMileDesc("Walking");
     }
 
     @Test
-    void getHikeByIdReturnsOptional() {
-        HikeLog hike = new HikeLog(); hike.setId(1L);
-        when(mockRepo.findById(1L)).thenReturn(Optional.of(hike));
+    void logsForUserReturnsUserLogs() {
 
-        Optional<HikeLog> result = controller.getHikeById(1L);
-
-        assertTrue(result.isPresent());
-        assertEquals(hike, result.get());
-        verify(mockRepo, times(1)).findById(1L);
-    }
-
-    @Test
-    void getAllHikesReturnsAll() {
         HikeLog hike1 = new HikeLog();
+        hike1.setUserId(5L);
+
         HikeLog hike2 = new HikeLog();
-        List<HikeLog> allHikes = List.of(hike1, hike2);
+        hike2.setUserId(5L);
 
-        when(mockRepo.findAll()).thenReturn(allHikes);
+        List<HikeLog> userLogs = List.of(hike1, hike2);
 
-        List<HikeLog> result = controller.getAllHikes();
+        when(mockRepo.findByUserIdOrderByCreatedAtDesc(5L))
+                .thenReturn(userLogs);
+
+        List<HikeLog> result = controller.logsForUser(5L);
 
         assertEquals(2, result.size());
-        verify(mockRepo, times(1)).findAll();
+
+        verify(mockRepo, times(1))
+                .findByUserIdOrderByCreatedAtDesc(5L);
     }
 }
