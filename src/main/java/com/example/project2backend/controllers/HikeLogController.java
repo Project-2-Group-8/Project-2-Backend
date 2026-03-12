@@ -5,15 +5,17 @@ import com.example.project2backend.repositories.HikeLogRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:5173")
-@RequestMapping("/api/hike_logs")
+@RequestMapping("/api/hike-logs")
 public class HikeLogController {
 
     @Autowired
     private HikeLogRepository hikeLogRepository;
+
+    public HikeLogController(HikeLogRepository hikeLogRepository) {
+        this.hikeLogRepository = hikeLogRepository;
+    }
 
     // RECEIVE DATA: Save a hike from the Landing Page
     @PostMapping
@@ -24,16 +26,11 @@ public class HikeLogController {
     // SEND DATA: Get the leaderboard filtered by type
     @GetMapping("/leaderboard")
     public List<HikeLog> getLeaderboard(@RequestParam String type) {
-        return hikeLogRepository.findByActivityTypeOrderByDistanceMilesDesc(type);
+        return hikeLogRepository.findByActivityTypeOrderByDistanceMileDesc(type);
     }
 
-    @GetMapping("/{id}")
-    public Optional<HikeLog> getHikeById(@PathVariable Long id) {
-        return hikeLogRepository.findById(id);
-    }
-
-    @GetMapping
-    public List<HikeLog> getAllHikes() {
-        return hikeLogRepository.findAll(); // get all hike logs
+    @GetMapping("/user/{userId}")
+    public List<HikeLog> logsForUser(@PathVariable Long userId) {
+        return hikeLogRepository.findByUserIdOrderByCreatedAtDesc(userId);
     }
 }

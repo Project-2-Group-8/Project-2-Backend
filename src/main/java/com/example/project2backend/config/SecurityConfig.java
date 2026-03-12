@@ -29,9 +29,8 @@ public class SecurityConfig {
         .authorizeHttpRequests(auth -> auth
             .requestMatchers("/auth/**").permitAll()
             .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                // Temporarily changed to permitAll for development & testing of the React Dashboard.
-                // Will be changed back once supabase/oauth are integrated with data
-                .requestMatchers("/api/**").permitAll()
+//            .requestMatchers("/api/**").authenticated() // Disabled for testing routes
+            .requestMatchers("/api/**").permitAll()  // Temporarily enabled for testing routes
             .anyRequest().permitAll()
         )
         .oauth2Login(oauth -> oauth

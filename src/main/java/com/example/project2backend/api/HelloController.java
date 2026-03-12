@@ -19,9 +19,4 @@ public class HelloController {
         "email", user.getAttribute("email")
     );
   }
-  @GetMapping("/test")
-  public void test() {
-    System.out.println("Testing");
-    return;
-  }
 }
