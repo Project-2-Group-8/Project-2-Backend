@@ -11,7 +11,7 @@ import java.util.List;
 public class HikeLogController {
 
     @Autowired
-    private HikeLogRepository hikeLogRepository;
+    public HikeLogRepository hikeLogRepository;
 
     public HikeLogController(HikeLogRepository hikeLogRepository) {
         this.hikeLogRepository = hikeLogRepository;
