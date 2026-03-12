@@ -13,7 +13,7 @@ import java.util.Optional;
 public class HikeLogController {
 
     @Autowired
-    private HikeLogRepository hikeLogRepository;
+    public HikeLogRepository hikeLogRepository;
 
     // RECEIVE DATA: Save a hike from the Landing Page
     @PostMapping
