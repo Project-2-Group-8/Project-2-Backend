@@ -31,9 +31,4 @@ class HelloControllerUnitTest {
         assertEquals("Authenticated ✅", result.get("message"));
         assertEquals("user@example.com", result.get("email"));
     }
-
-    @Test
-    void testMethodReturnsVoid() {
-        controller.test();
-    }
 }

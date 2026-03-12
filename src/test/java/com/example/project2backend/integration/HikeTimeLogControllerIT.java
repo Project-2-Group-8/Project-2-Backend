@@ -31,7 +31,7 @@ class HikeTimeLogControllerIT {
     @BeforeEach
     void setUp() {
         RestAssured.port = port;
-        repository.deleteAll(); // clean database before each test
+        repository.deleteAll();
     }
 
     @Test
@@ -39,7 +39,7 @@ class HikeTimeLogControllerIT {
         Map<String, Object> req = new HashMap<>();
         req.put("activityType", "trail");
         req.put("notes", "Beautiful hike");
-        req.put("someBooleanField", false); // adjust field name if needed
+        req.put("someBooleanField", false);
 
         // POST /api/hike-times
         given()
