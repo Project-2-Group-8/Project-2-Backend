@@ -29,4 +29,19 @@ public class HikeController {
     public Hike create(@RequestBody Hike hike) {
         return hikeService.createHike(hike);
     }
+
+    @PutMapping("/{id}")
+    public Hike update(@PathVariable Long id, @RequestBody Hike updatedHike) {
+        return hikeService.updateHike(id, updatedHike);
+    }
+
+    @PatchMapping("/{id}")
+    public Hike partialUpdate(@PathVariable Long id, @RequestBody Hike updatedHike) {
+        return hikeService.partialUpdateHike(id, updatedHike);
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        hikeService.deleteHike(id);
+    }
 }
