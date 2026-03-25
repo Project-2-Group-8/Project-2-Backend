@@ -27,7 +27,7 @@ class HikeLogControllerIT {
     @BeforeEach
     void setUp() {
         RestAssured.port = port;
-        hikeLogRepository.deleteAll(); // clean slate before each test
+        hikeLogRepository.deleteAll();
     }
 
     @Test
@@ -43,7 +43,7 @@ class HikeLogControllerIT {
                 .when().post("/api/hike_logs")
                 .then().statusCode(200)
                 .body("activityType", equalTo("trail"))
-                .body("distanceMiles", equalTo(5.0f)); // REST Assured uses float for JSON numbers
+                .body("distanceMiles", equalTo(5.0f));
 
         // GET all hikes
         RestAssured.given()

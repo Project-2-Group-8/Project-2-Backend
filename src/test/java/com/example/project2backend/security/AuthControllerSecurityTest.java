@@ -11,7 +11,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@WebMvcTest(AuthController.class) // ✅ no excludeAutoConfiguration
+@WebMvcTest(AuthController.class)
 class AuthControllerSecurityTest {
 
     @Autowired
@@ -39,7 +39,7 @@ class AuthControllerSecurityTest {
     }
 
     @Test
-    @WithMockUser // simulates authenticated user
+    @WithMockUser
     void meWithUserReturnsAuthenticated() throws Exception {
         mockMvc.perform(get("/auth/me"))
                 .andExpect(status().isOk())
