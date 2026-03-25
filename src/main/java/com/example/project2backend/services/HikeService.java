@@ -15,7 +15,7 @@ public class HikeService {
     }
 
     public List<Hike> getAllHikes() {
-        return hikeRepository.findAll();
+        return hikeRepository.findAllByOrderByHikeIdAsc();
     }
 
     public Hike getHike(Long id) {

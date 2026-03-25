@@ -1,7 +1,9 @@
 package com.example.project2backend.controllers;
 
+import com.example.project2backend.models.Hike;
 import com.example.project2backend.models.HikeLog;
 import com.example.project2backend.repositories.HikeLogRepository;
+import com.example.project2backend.services.HikeLogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -12,7 +14,10 @@ public class HikeLogController {
 
     @Autowired
     public HikeLogRepository hikeLogRepository;
-
+//    private final HikeLogService hikeLogService;
+//    public HikeLogController(HikeLogService hikeLogService) {
+//        this.hikeLogService = hikeLogService;
+//    }
     public HikeLogController(HikeLogRepository hikeLogRepository) {
         this.hikeLogRepository = hikeLogRepository;
     }
@@ -33,4 +38,9 @@ public class HikeLogController {
     public List<HikeLog> logsForUser(@PathVariable Long userId) {
         return hikeLogRepository.findByUserIdOrderByCreatedAtDesc(userId);
     }
+
+//    @GetMapping("/hike/{hikeId}")
+//    public List<HikeLog> logsByHike(@PathVariable Long hikeId) {
+//        return hikeLogService.getLogsByHikeId(hikeId);
+//    }
 }
