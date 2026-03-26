@@ -1,14 +1,17 @@
 package com.example.project2backend.controllers;
 
 import com.example.project2backend.models.Hike;
+import com.example.project2backend.repositories.HikeRepository;
 import com.example.project2backend.services.HikeService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/hikes")
 public class HikeController {
-
+    @Autowired
+    private HikeRepository HikeRepository;
     private final HikeService hikeService;
 
     public HikeController(HikeService hikeService) {
@@ -25,6 +28,13 @@ public class HikeController {
         return hikeService.getHike(id);
     }
 
+    @GetMapping("/leaderboard")
+    public List<Object[]> getLeaderboard(@RequestParam(required = false, defaultValue = "Running") String type) {
+        if ("Walking".equalsIgnoreCase(type)) {
+            return HikeRepository.getFastestWalking();
+        }
+        return HikeRepository.getFastestRunning();
+    }
     @PostMapping
     public Hike create(@RequestBody Hike hike) {
         return hikeService.createHike(hike);

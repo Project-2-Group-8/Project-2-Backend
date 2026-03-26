@@ -1,6 +1,7 @@
 package com.example.project2backend.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -20,6 +21,7 @@ public class HikeLog {
     @Column(name = "duration_min")
     private Double durationMin;
 
+    @JsonProperty("rating")
     @Column(name = "rating")
     private Integer rating;
 
@@ -32,6 +34,7 @@ public class HikeLog {
     @Column(name = "activity_type")
     private String activityType; // "Walking" or "Running"
 
+    @JsonProperty("lengthMi")
     @Column(name = "distance_mile")
     private Double distanceMile;
 
